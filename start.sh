@@ -13,31 +13,30 @@ test -n "${ES_PORT}"  || exit 1
 CONTAINER_KIBANA_ROOT=/src/kibana
 LOCAL_KIBANA_VOLUME=/var/lib/kibana
 
-cat > ${CONTAINER_KIBANA_ROOT}/src/config.js <<EOS
+cat > ${CONTAINER_KIBANA_ROOT}/config.js <<EOS
 define(['settings'],
 function (Settings) {
   "use strict";
 
   return new Settings({
     elasticsearch: "${ES_PROTO}://${ES_HOST}:${ES_PORT}",
+    default_route: '/dashboard/file/default.json',
     kibana_index: "kibana-int",
     panel_names: [
       'histogram',
       'map',
-      'pie',
+      'goal',
       'table',
       'filtering',
       'timepicker',
       'text',
-      'fields',
       'hits',
-      'dashcontrol',
       'column',
-      'derivequeries',
       'trends',
       'bettermap',
       'query',
       'terms',
+      'stats',
       'sparklines'
     ]
   });
